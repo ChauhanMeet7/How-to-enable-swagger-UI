@@ -1,0 +1,36 @@
+here is the dbcontext file 
+namespace Practice_API.Data
+{
+    public class AppDbContext: DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
+        public DbSet<LoginDemoAPI> loginDemoAPI { get; set; }
+      
+    }
+}
+
+it look like this 
+here is the connection string
+
+"ConnectionStrings": {
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=API;Integrated Security=True;Encrypt=False ;"
+},
+
+and now if you want to use in controller to perform crud 
+first you need to write this :
+
+
+  [Route("api/[controller]")]
+  [ApiController]
+  public class LoginDemoAPIController : ControllerBase
+  {
+      public readonly AppDbContext context;
+      public LoginDemoAPIController(AppDbContext context)
+      {
+          this.context = context;
+      }
+  }
+
+  }
